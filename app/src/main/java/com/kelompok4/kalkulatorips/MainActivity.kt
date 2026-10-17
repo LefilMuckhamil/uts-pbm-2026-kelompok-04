@@ -49,7 +49,6 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun KalkulatorIpsScreen(modifier: Modifier = Modifier) {
-    // Contoh daftar mata kuliah
     val contohDaftarMatkul = listOf(
         MataKuliah(kode = "IF101", nama = "Pemrograman Android", sks = 3, nilaiAngka = 88.0),
         MataKuliah(kode = "IF102", nama = "Basis Data lanjut", sks = 4, nilaiAngka = 78.0),
