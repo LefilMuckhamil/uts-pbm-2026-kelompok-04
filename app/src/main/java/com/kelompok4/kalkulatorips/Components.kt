@@ -481,6 +481,37 @@ fun ItemMataKuliahCard(
 }
 
 
+
+@Composable
+fun EmptyMataKuliahState(
+    modifier: Modifier = Modifier
+) {
+    Card(
+        modifier = modifier,
+        shape = RoundedCornerShape(12.dp),
+        colors = CardDefaults.cardColors(
+            containerColor = Color.White
+        ),
+        elevation = CardDefaults.cardElevation(
+            defaultElevation = 1.dp
+        )
+    ) {
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(24.dp),
+            contentAlignment = Alignment.Center
+        ) {
+            Text(
+                text = "Belum ada mata kuliah. Silakan isi dulu yaaw!!",
+                fontSize = 13.sp,
+                color = TextGray
+            )
+        }
+    }
+}
+
+
 // Card bagian bawah buat ngeliat statistik sebaran nilai & info syarat SKS
 @Composable
 fun RingkasanNilaiCard(

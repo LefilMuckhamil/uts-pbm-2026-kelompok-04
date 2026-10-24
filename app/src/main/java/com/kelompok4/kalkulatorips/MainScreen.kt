@@ -211,33 +211,14 @@ fun MainScreen() {
         }
 
         // List matkul yang udah diinput (atau keadaan kosong jika belum ada)
+
         if (daftarMataKuliah.isEmpty()) {
             item {
-                Card(
+                EmptyMataKuliahState(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(horizontal = 16.dp, vertical = 4.dp),
-                    shape = RoundedCornerShape(12.dp),
-                    colors = CardDefaults.cardColors(
-                        containerColor = Color.White
-                    ),
-                    elevation = CardDefaults.cardElevation(
-                        defaultElevation = 1.dp
-                    )
-                ) {
-                    Box(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(24.dp),
-                        contentAlignment = Alignment.Center
-                    ) {
-                        Text(
-                            text = "Belum ada mata kuliah. Silakan isi form di atas.",
-                            fontSize = 13.sp,
-                            color = TextGray
-                        )
-                    }
-                }
+                        .padding(horizontal = 16.dp, vertical = 4.dp)
+                )
             }
         } else {
             items(
@@ -268,6 +249,7 @@ fun MainScreen() {
                 }
             }
         }
+
 
         // Section ringkasan nilai & sebaran
         item {
