@@ -11,9 +11,10 @@ import androidx.compose.ui.Modifier
 import com.kelompok4.kalkulatorips.ui.theme.KalkulatorIPSDanSKSTheme
 
 class MainActivity : ComponentActivity() {
+    // refactor code coment
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        // Bikin tampilan transparan sampe ke status bar
+
         enableEdgeToEdge()
         setContent {
             KalkulatorIPSDanSKSTheme {
