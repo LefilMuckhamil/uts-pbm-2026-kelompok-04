@@ -46,7 +46,7 @@ import java.util.Locale
 fun MainScreen() {
     val context = LocalContext.current
 
-    // Data awal kosongan (user bisa nambah sendiri lewat form)
+    // Data awal kosongan user bisa nambah
     val daftarMataKuliah = remember { mutableStateListOf<MataKuliah>() }
 
     // State penampung inputan form
