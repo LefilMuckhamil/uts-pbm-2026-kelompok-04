@@ -18,9 +18,9 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.FormatListBulleted
 import androidx.compose.material.icons.filled.Analytics
 import androidx.compose.material.icons.filled.Book
-import androidx.compose.material.icons.filled.FormatListBulleted
 import androidx.compose.material.icons.filled.TrackChanges
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -168,7 +168,7 @@ fun MainScreen() {
                         contentAlignment = Alignment.Center
                     ) {
                         Icon(
-                            imageVector = Icons.Default.FormatListBulleted,
+                            imageVector = Icons.AutoMirrored.Filled.FormatListBulleted,
                             contentDescription = "Daftar Matkul",
                             tint = Color.White,
                             modifier = Modifier.size(18.dp)
