@@ -62,7 +62,7 @@ val TrashRed = Color(0xFFEF4444)
 val GreenSuccess = Color(0xFF10B981)
 val GreenSuccessBg = Color(0xFFECFDF5)
 
-// Header paling atas, udah pake statusBarsPadding biar gak ketutup jam & baterai
+// Header paling atas, udah pake stauts biar gak ketutup
 @Composable
 fun HeaderSection() {
     Box(
