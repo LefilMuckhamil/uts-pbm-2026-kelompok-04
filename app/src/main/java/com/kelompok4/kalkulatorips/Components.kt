@@ -52,7 +52,7 @@ import androidx.compose.ui.unit.sp
 import java.util.Locale
 
 // Palette warna khusus tema aplikasi
-val HeaderNavy = Color(0xFF0F2B5B)
+val HeaderNavy = Color(0xFFFBCFE8)
 val LightBg = Color(0xFFF4F6FB)
 val CardBorderColor = Color(0xFFE2E8F0)
 val PrimaryBlue = Color(0xFF1D61E7)
