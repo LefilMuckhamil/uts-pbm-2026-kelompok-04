@@ -52,7 +52,9 @@ fun MainScreen() {
             MataKuliah(nama = "Basis Data", sks = 3, nilaiHuruf = "B", bobot = 3.00),
             MataKuliah(nama = "Jaringan Komputer", sks = 3, nilaiHuruf = "A", bobot = 4.00),
             MataKuliah(nama = "Pemrograman Web", sks = 3, nilaiHuruf = "B+", bobot = 3.50),
-        )
+            MataKuliah(nama = "Matematika", sks = 3, nilaiHuruf = "B+", bobot = 3.50),
+
+            )
     }
 
     // State penampung inputan form
