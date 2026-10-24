@@ -11,6 +11,7 @@ import androidx.compose.ui.Modifier
 import com.kelompok4.kalkulatorips.ui.theme.KalkulatorIPSDanSKSTheme
 
 class MainActivity : ComponentActivity() {
+    // penambahan akun dan push commit mutia
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
