@@ -6,7 +6,7 @@ import java.math.RoundingMode
 // Pusat logika kalkulasi IPS dan pemetaan nilai kampus
 object Logika {
 
-    // Patokan acuan nilai huruf ke bobot angkanya
+    // Patokan acuan nilainya huruf ke bobot angkanya
     val daftarPilihanNilai = listOf(
         "A" to 4.00,
         "A-" to 3.75,
