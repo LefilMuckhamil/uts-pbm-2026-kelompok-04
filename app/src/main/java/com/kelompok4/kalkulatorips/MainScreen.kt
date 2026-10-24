@@ -1,3 +1,4 @@
+
 package com.kelompok4.kalkulatorips
 
 import android.widget.Toast
@@ -47,7 +48,9 @@ fun MainScreen() {
     val context = LocalContext.current
 
     // Data awal kosongan user bisa nambah user
-    val daftarMataKuliah = remember { mutableStateListOf<MataKuliah>() }
+    val daftarMataKuliah = remember {
+        mutableStateListOf<MataKuliah>()
+    }
 
     // State penampung inputan form
     var namaInput by remember { mutableStateOf("") }
@@ -122,19 +125,34 @@ fun MainScreen() {
                     onNilaiSelected = { nilaiSelected = it },
                     onTambahClicked = {
                         if (namaInput.isBlank()) {
-                            Toast.makeText(context, "Isi dulu nama mata kuliahnya ya!", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(
+                                context,
+                                "Isi dulu nama mata kuliahnya ya!",
+                                Toast.LENGTH_SHORT
+                            ).show()
                             return@FormTambahMataKuliahCard
                         }
+
                         if (sksSelected == null) {
-                            Toast.makeText(context, "Pilih jumlah SKS terlebih dahulu!", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(
+                                context,
+                                "Pilih jumlah SKS terlebih dahulu!",
+                                Toast.LENGTH_SHORT
+                            ).show()
                             return@FormTambahMataKuliahCard
                         }
+
                         if (nilaiSelected == null) {
-                            Toast.makeText(context, "Pilih nilai hurufnya dulu ya!", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(
+                                context,
+                                "Pilih nilai hurufnya dulu ya!",
+                                Toast.LENGTH_SHORT
+                            ).show()
                             return@FormTambahMataKuliahCard
                         }
 
                         val bobot = Logika.dapatkanBobot(nilaiSelected!!)
+
                         daftarMataKuliah.add(
                             0, // Taruh paling atas
                             MataKuliah(
@@ -145,11 +163,16 @@ fun MainScreen() {
                             )
                         )
 
-                        // Riset inputan setelah berhasil
+                        // Reset inputan setelah berhasil
                         namaInput = ""
                         sksSelected = null
                         nilaiSelected = null
-                        Toast.makeText(context, "Sip! Mata kuliah berhasil ditambah", Toast.LENGTH_SHORT).show()
+
+                        Toast.makeText(
+                            context,
+                            "Sip! Mata kuliah berhasil ditambah",
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
                 )
 
@@ -174,7 +197,9 @@ fun MainScreen() {
                             modifier = Modifier.size(18.dp)
                         )
                     }
+
                     Spacer(modifier = Modifier.width(10.dp))
+
                     Text(
                         text = "Daftar Mata Kuliah (${daftarMataKuliah.size})",
                         fontSize = 16.sp,
@@ -193,8 +218,12 @@ fun MainScreen() {
                         .fillMaxWidth()
                         .padding(horizontal = 16.dp, vertical = 4.dp),
                     shape = RoundedCornerShape(12.dp),
-                    colors = CardDefaults.cardColors(containerColor = Color.White),
-                    elevation = CardDefaults.cardElevation(defaultElevation = 1.dp)
+                    colors = CardDefaults.cardColors(
+                        containerColor = Color.White
+                    ),
+                    elevation = CardDefaults.cardElevation(
+                        defaultElevation = 1.dp
+                    )
                 ) {
                     Box(
                         modifier = Modifier
@@ -215,12 +244,25 @@ fun MainScreen() {
                 items = daftarMataKuliah,
                 key = { it.id }
             ) { matkul ->
-                Box(modifier = Modifier.padding(horizontal = 16.dp, vertical = 4.dp)) {
+                Box(
+                    modifier = Modifier.padding(
+                        horizontal = 16.dp,
+                        vertical = 4.dp
+                    )
+                ) {
                     ItemMataKuliahCard(
                         matkul = matkul,
                         onDeleteClicked = {
-                            daftarMataKuliah.remove(matkul)
-                            Toast.makeText(context, "Mata kuliah dihapus", Toast.LENGTH_SHORT).show()
+                            val berhasilDihapus =
+                                daftarMataKuliah.remove(matkul)
+
+                            if (berhasilDihapus) {
+                                Toast.makeText(
+                                    context,
+                                    "Mata kuliah berhasil dihapus",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            }
                         }
                     )
                 }
@@ -229,7 +271,9 @@ fun MainScreen() {
 
         // Section ringkasan nilai & sebaran
         item {
-            Box(modifier = Modifier.padding(16.dp)) {
+            Box(
+                modifier = Modifier.padding(16.dp)
+            ) {
                 RingkasanNilaiCard(
                     daftarMataKuliah = daftarMataKuliah,
                     ips = ips,
