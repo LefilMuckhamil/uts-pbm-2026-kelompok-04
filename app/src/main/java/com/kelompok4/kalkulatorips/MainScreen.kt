@@ -43,7 +43,7 @@ import java.util.Locale
 fun MainScreen() {
     val context = LocalContext.current
 
-    // Sample data matching user screenshot
+    // Data awal sampel matkul biar pas pertama kali buka langsung keliatan cantik
     val daftarMataKuliah = remember {
         mutableStateListOf(
             MataKuliah(nama = "Algoritma dan Pemrograman", sks = 3, nilaiHuruf = "A", bobot = 4.00),
@@ -51,16 +51,16 @@ fun MainScreen() {
             MataKuliah(nama = "Sistem Informasi", sks = 2, nilaiHuruf = "A-", bobot = 3.75),
             MataKuliah(nama = "Basis Data", sks = 3, nilaiHuruf = "B", bobot = 3.00),
             MataKuliah(nama = "Jaringan Komputer", sks = 3, nilaiHuruf = "A", bobot = 4.00),
-            MataKuliah(nama = "Pemrograman Web", sks = 3, nilaiHuruf = "B+", bobot = 3.50)
+            MataKuliah(nama = "Pemrograman Web", sks = 3, nilaiHuruf = "B+", bobot = 3.50),
         )
     }
 
-    // Input States
+    // State penampung inputan form
     var namaInput by remember { mutableStateOf("") }
     var sksSelected by remember { mutableStateOf<Int?>(null) }
     var nilaiSelected by remember { mutableStateOf<String?>(null) }
 
-    // Calculated Stats
+    // Hitung ulang statistik tiap kali data matkul berubah
     val ips = Logika.hitungIPSFormatted(daftarMataKuliah)
     val totalSks = Logika.hitungTotalSKS(daftarMataKuliah)
     val batasSks = Logika.hitungBatasSKS(ips)
@@ -70,7 +70,7 @@ fun MainScreen() {
             .fillMaxSize()
             .background(LightBg)
     ) {
-        // 1. Header Section
+        // Banner header atas
         item {
             HeaderSection()
         }
@@ -81,7 +81,7 @@ fun MainScreen() {
                     .fillMaxWidth()
                     .padding(16.dp)
             ) {
-                // 2. Summary Stat Cards
+                // Baris kartu indikator (IPS, Total SKS, Batas SKS)
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.spacedBy(10.dp)
@@ -118,7 +118,7 @@ fun MainScreen() {
 
                 Spacer(modifier = Modifier.height(16.dp))
 
-                // 3. Form Input Card
+                // Form buat nambah matkul baru
                 FormTambahMataKuliahCard(
                     namaMatkul = namaInput,
                     onNamaChange = { namaInput = it },
@@ -128,21 +128,21 @@ fun MainScreen() {
                     onNilaiSelected = { nilaiSelected = it },
                     onTambahClicked = {
                         if (namaInput.isBlank()) {
-                            Toast.makeText(context, "Nama mata kuliah tidak boleh kosong!", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(context, "Isi dulu nama mata kuliahnya ya!", Toast.LENGTH_SHORT).show()
                             return@FormTambahMataKuliahCard
                         }
                         if (sksSelected == null) {
-                            Toast.makeText(context, "Pilih jumlah SKS!", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(context, "Pilih jumlah SKS terlebih dahulu!", Toast.LENGTH_SHORT).show()
                             return@FormTambahMataKuliahCard
                         }
                         if (nilaiSelected == null) {
-                            Toast.makeText(context, "Pilih nilai huruf!", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(context, "Pilih nilai hurufnya dulu ya!", Toast.LENGTH_SHORT).show()
                             return@FormTambahMataKuliahCard
                         }
 
                         val bobot = Logika.dapatkanBobot(nilaiSelected!!)
                         daftarMataKuliah.add(
-                            0,
+                            0, // Taruh paling atas
                             MataKuliah(
                                 nama = namaInput.trim(),
                                 sks = sksSelected!!,
@@ -151,16 +151,17 @@ fun MainScreen() {
                             )
                         )
 
+                        // Riset inputan setelah berhasil
                         namaInput = ""
                         sksSelected = null
                         nilaiSelected = null
-                        Toast.makeText(context, "Mata kuliah berhasil ditambahkan", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(context, "Sip! Mata kuliah berhasil ditambah", Toast.LENGTH_SHORT).show()
                     }
                 )
 
                 Spacer(modifier = Modifier.height(20.dp))
 
-                // 4. List Title
+                // Judul daftar matkul
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
                     modifier = Modifier.padding(bottom = 10.dp)
@@ -174,7 +175,7 @@ fun MainScreen() {
                     ) {
                         Icon(
                             imageVector = Icons.Default.FormatListBulleted,
-                            contentDescription = "List",
+                            contentDescription = "Daftar Matkul",
                             tint = Color.White,
                             modifier = Modifier.size(18.dp)
                         )
@@ -190,7 +191,7 @@ fun MainScreen() {
             }
         }
 
-        // 5. Items List
+        // List matkul yang udah diinput
         items(
             items = daftarMataKuliah,
             key = { it.id }
@@ -206,7 +207,7 @@ fun MainScreen() {
             }
         }
 
-        // 6. Ringkasan Nilai Section
+        // Section ringkasan nilai & sebaran
         item {
             Box(modifier = Modifier.padding(16.dp)) {
                 RingkasanNilaiCard(

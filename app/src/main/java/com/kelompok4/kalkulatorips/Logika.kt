@@ -3,8 +3,10 @@ package com.kelompok4.kalkulatorips
 import java.math.BigDecimal
 import java.math.RoundingMode
 
+// Pusat logika kalkulasi IPS dan pemetaan nilai kampus
 object Logika {
 
+    // Patokan acuan nilai huruf ke bobot angkanya
     val daftarPilihanNilai = listOf(
         "A" to 4.00,
         "A-" to 3.75,
@@ -14,10 +16,10 @@ object Logika {
         "C+" to 2.50,
         "C" to 2.00,
         "D" to 1.00,
-        "E" to 0.00
+        "E" to 0.00,
     )
 
-    // 1. Konversi Nilai Angka ke Huruf
+    // Konversi cepat dari nilai angka (0-100) ke huruf mutu
     fun konversiAngkaKeHuruf(nilaiAngka: Double): String {
         return when {
             nilaiAngka in 85.0..100.0 -> "A"
@@ -32,7 +34,7 @@ object Logika {
         }
     }
 
-    // 2. Dapatkan Bobot berdasarkan Nilai Huruf
+    // Cari bobot angka berdasarkan huruf nilainya
     fun dapatkanBobot(nilaiHuruf: String): Double {
         return daftarPilihanNilai.find { it.first.equals(nilaiHuruf, ignoreCase = true) }?.second
             ?: when (nilaiHuruf.uppercase()) {
@@ -49,7 +51,7 @@ object Logika {
 
     fun getBobotFromHuruf(nilaiHuruf: String): Double = dapatkanBobot(nilaiHuruf)
 
-    // 3. Hitung IPS
+    // Rumus sakti hitung IPS: Total (SKS * Bobot) / Total SKS
     fun hitungIPS(daftarMK: List<MataKuliah>): Double {
         val totalSks = daftarMK.sumOf { it.sks }
         if (totalSks == 0) return 0.0
@@ -57,6 +59,7 @@ object Logika {
         return totalKredit / totalSks
     }
 
+    // Biar rapi, kita bulatkan IPS ke 2 angka di belakang koma
     fun hitungIPSFormatted(daftarMK: List<MataKuliah>, presisi: Int = 2): Double {
         val ips = hitungIPS(daftarMK)
         if (ips.isNaN() || ips.isInfinite()) return 0.0
@@ -65,11 +68,12 @@ object Logika {
             .toDouble()
     }
 
+    // Totalin seluruh SKS yang lagi diambil
     fun hitungTotalSKS(daftarMK: List<MataKuliah>): Int {
         return daftarMK.sumOf { it.sks }
     }
 
-    // 4. Tentukan Batas SKS Semester Berikutnya
+    // Aturan standar kampus buat nentuin jatah SKS semester depan
     fun tentukanBatasSKS(ips: Double): Int {
         return when {
             ips >= 3.00 -> 24
@@ -82,12 +86,12 @@ object Logika {
 
     fun hitungBatasSKS(ips: Double): Int = tentukanBatasSKS(ips)
 
-    // 5. Filter MK Bernilai D atau E
+    // Cek matkul yang harus diulang (yang dapet D atau E)
     fun dapatkanMKPerluDiulang(daftarMK: List<MataKuliah>): List<MataKuliah> {
         return daftarMK.filter { it.nilaiHuruf == "D" || it.nilaiHuruf == "E" }
     }
 
-    // 6. Hitung jumlah MK berdasarkan nilai huruf
+    // Hitung berapa matkul yang dapet nilai huruf tertentu
     fun hitungJumlahNilai(daftarMK: List<MataKuliah>, huruf: String): Int {
         return daftarMK.count { it.nilaiHuruf.equals(huruf, ignoreCase = true) }
     }

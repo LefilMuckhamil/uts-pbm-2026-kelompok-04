@@ -13,6 +13,7 @@ import com.kelompok4.kalkulatorips.ui.theme.KalkulatorIPSDanSKSTheme
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        // Bikin tampilan transparan sampe ke status bar
         enableEdgeToEdge()
         setContent {
             KalkulatorIPSDanSKSTheme {

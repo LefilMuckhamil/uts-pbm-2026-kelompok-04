@@ -51,7 +51,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import java.util.Locale
 
-// Custom Colors
+// Palette warna khusus tema aplikasi
 val HeaderNavy = Color(0xFF0F2B5B)
 val LightBg = Color(0xFFF4F6FB)
 val CardBorderColor = Color(0xFFE2E8F0)
@@ -62,9 +62,7 @@ val TrashRed = Color(0xFFEF4444)
 val GreenSuccess = Color(0xFF10B981)
 val GreenSuccessBg = Color(0xFFECFDF5)
 
-/**
- * Header Atas dengan dukungan Status Bar Insets (Edge-to-Edge)
- */
+// Header paling atas, udah pake statusBarsPadding biar gak ketutup jam & baterai
 @Composable
 fun HeaderSection() {
     Box(
@@ -74,9 +72,7 @@ fun HeaderSection() {
             .statusBarsPadding()
             .padding(horizontal = 20.dp, vertical = 20.dp)
     ) {
-        Row(
-            verticalAlignment = Alignment.CenterVertically
-        ) {
+        Row(verticalAlignment = Alignment.CenterVertically) {
             Box(
                 modifier = Modifier
                     .size(48.dp)
@@ -86,7 +82,7 @@ fun HeaderSection() {
             ) {
                 Icon(
                     imageVector = Icons.Default.School,
-                    contentDescription = "School Logo",
+                    contentDescription = "Logo Kampus",
                     tint = Color.White,
                     modifier = Modifier.size(28.dp)
                 )
@@ -111,9 +107,7 @@ fun HeaderSection() {
     }
 }
 
-/**
- * Kartu Ringkasan Statistik
- */
+// Card kecil ringkasan angka di bagian atas (IPS, SKS, Batas SKS)
 @Composable
 fun SummaryStatCard(
     title: String,
@@ -181,9 +175,7 @@ fun SummaryStatCard(
     }
 }
 
-/**
- * Form Tambah Mata Kuliah
- */
+// Card form tempat user nginput nama matkul, SKS, dan nilainya
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun FormTambahMataKuliahCard(
@@ -207,7 +199,7 @@ fun FormTambahMataKuliahCard(
         elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
     ) {
         Column(modifier = Modifier.padding(16.dp)) {
-            // Header Kartu
+            // Judul form
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Box(
                     modifier = Modifier
@@ -218,7 +210,7 @@ fun FormTambahMataKuliahCard(
                 ) {
                     Icon(
                         imageVector = Icons.Default.Add,
-                        contentDescription = "Add",
+                        contentDescription = "Tambah Icon",
                         tint = Color.White,
                         modifier = Modifier.size(18.dp)
                     )
@@ -234,7 +226,7 @@ fun FormTambahMataKuliahCard(
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            // Input 1: Nama Mata Kuliah
+            // Textfield nama matkul
             Text(
                 text = "Nama Mata Kuliah",
                 fontSize = 12.sp,
@@ -263,7 +255,7 @@ fun FormTambahMataKuliahCard(
 
             Spacer(modifier = Modifier.height(12.dp))
 
-            // Input 2: SKS Exposed Dropdown
+            // Dropdown milih jumlah SKS
             Text(
                 text = "SKS",
                 fontSize = 12.sp,
@@ -290,7 +282,7 @@ fun FormTambahMataKuliahCard(
                     leadingIcon = {
                         Icon(
                             imageVector = Icons.Default.DateRange,
-                            contentDescription = "SKS",
+                            contentDescription = "Ikon SKS",
                             tint = TextGray,
                             modifier = Modifier.size(20.dp)
                         )
@@ -323,7 +315,7 @@ fun FormTambahMataKuliahCard(
 
             Spacer(modifier = Modifier.height(12.dp))
 
-            // Input 3: Nilai Exposed Dropdown
+            // Dropdown milih nilai huruf
             Text(
                 text = "Nilai",
                 fontSize = 12.sp,
@@ -378,7 +370,7 @@ fun FormTambahMataKuliahCard(
 
             Spacer(modifier = Modifier.height(18.dp))
 
-            // Tombol Simpan
+            // Tombol buat nyimpen data matkul
             Button(
                 onClick = onTambahClicked,
                 modifier = Modifier
@@ -389,7 +381,7 @@ fun FormTambahMataKuliahCard(
             ) {
                 Icon(
                     imageVector = Icons.Default.Add,
-                    contentDescription = "Add",
+                    contentDescription = "Simpan",
                     modifier = Modifier.size(18.dp)
                 )
                 Spacer(modifier = Modifier.width(6.dp))
@@ -403,9 +395,7 @@ fun FormTambahMataKuliahCard(
     }
 }
 
-/**
- * Item Mata Kuliah
- */
+// Tampilan tiap item matkul di dalam list, lengkap sama tombol hapus
 @Composable
 fun ItemMataKuliahCard(
     matkul: MataKuliah,
@@ -462,7 +452,7 @@ fun ItemMataKuliahCard(
                 ) {
                     Icon(
                         imageVector = Icons.Default.Delete,
-                        contentDescription = "Hapus",
+                        contentDescription = "Hapus Mata Kuliah",
                         tint = TrashRed,
                         modifier = Modifier.size(20.dp)
                     )
@@ -472,9 +462,7 @@ fun ItemMataKuliahCard(
     }
 }
 
-/**
- * Ringkasan Nilai
- */
+// Card bagian bawah buat ngeliat statistik sebaran nilai & info syarat SKS
 @Composable
 fun RingkasanNilaiCard(
     daftarMataKuliah: List<MataKuliah>,
@@ -489,7 +477,7 @@ fun RingkasanNilaiCard(
         elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
     ) {
         Column(modifier = Modifier.padding(16.dp)) {
-            // Judul Ringkasan
+            // Header ringkasan
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Box(
                     modifier = Modifier
@@ -500,7 +488,7 @@ fun RingkasanNilaiCard(
                 ) {
                     Icon(
                         imageVector = Icons.Default.BarChart,
-                        contentDescription = "Chart",
+                        contentDescription = "Grafik Bar",
                         tint = Color.White,
                         modifier = Modifier.size(18.dp)
                     )
@@ -534,6 +522,7 @@ fun RingkasanNilaiCard(
                 Triple("C", 2.00, Color(0xFFCBD5E1))
             )
 
+            // Barchart mini sebaran nilai
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween
@@ -562,7 +551,7 @@ fun RingkasanNilaiCard(
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            // Banner Status Hijau
+            // Banner status kelayakan SKS semester depan
             val isSyaratLulus = ips >= 3.00
             val sisaSks = (batasSks - totalSks).coerceAtLeast(0)
 
@@ -592,7 +581,7 @@ fun RingkasanNilaiCard(
                         ) {
                             Icon(
                                 imageVector = Icons.Default.CheckCircle,
-                                contentDescription = "Success",
+                                contentDescription = "Selesai",
                                 tint = Color.White,
                                 modifier = Modifier.size(20.dp)
                             )
@@ -617,7 +606,7 @@ fun RingkasanNilaiCard(
                         Row(verticalAlignment = Alignment.CenterVertically) {
                             Icon(
                                 imageVector = Icons.Default.CheckCircle,
-                                contentDescription = "Check",
+                                contentDescription = "Syarat OK",
                                 tint = GreenSuccess,
                                 modifier = Modifier.size(14.dp)
                             )
