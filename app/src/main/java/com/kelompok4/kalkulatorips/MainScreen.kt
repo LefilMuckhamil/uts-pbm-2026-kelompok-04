@@ -104,7 +104,7 @@ fun MainScreen() {
                         value = "$batasSks",
                         subtext = "/ 144",
                         icon = Icons.Default.TrackChanges,
-                        iconBgColor = Color(0xFFF3E8FF),
+                        iconBgColor = Color(0xFFFBCFE8),
                         iconTint = Color(0xFF9333EA),
                         modifier = Modifier.weight(1f)
                     )
