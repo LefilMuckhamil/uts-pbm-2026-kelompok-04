@@ -16,11 +16,14 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Analytics
 import androidx.compose.material.icons.filled.Book
 import androidx.compose.material.icons.filled.FormatListBulleted
 import androidx.compose.material.icons.filled.TrackChanges
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -43,17 +46,8 @@ import java.util.Locale
 fun MainScreen() {
     val context = LocalContext.current
 
-    // Data awal sampel matkul biar pas pertama kali buka langsung keliatan cantik
-    val daftarMataKuliah = remember {
-        mutableStateListOf(
-            MataKuliah(nama = "Algoritma dan Pemrograman", sks = 3, nilaiHuruf = "A", bobot = 4.00),
-            MataKuliah(nama = "Matematika Diskrit", sks = 3, nilaiHuruf = "B+", bobot = 3.50),
-            MataKuliah(nama = "Sistem Informasi", sks = 2, nilaiHuruf = "A-", bobot = 3.75),
-            MataKuliah(nama = "Basis Data", sks = 3, nilaiHuruf = "B", bobot = 3.00),
-            MataKuliah(nama = "Jaringan Komputer", sks = 3, nilaiHuruf = "A", bobot = 4.00),
-            MataKuliah(nama = "Pemrograman Web", sks = 3, nilaiHuruf = "B+", bobot = 3.50),
-        )
-    }
+    // Data awal kosongan (user bisa nambah sendiri lewat form)
+    val daftarMataKuliah = remember { mutableStateListOf<MataKuliah>() }
 
     // State penampung inputan form
     var namaInput by remember { mutableStateOf("") }
@@ -191,19 +185,45 @@ fun MainScreen() {
             }
         }
 
-        // List matkul yang udah diinput
-        items(
-            items = daftarMataKuliah,
-            key = { it.id }
-        ) { matkul ->
-            Box(modifier = Modifier.padding(horizontal = 16.dp, vertical = 4.dp)) {
-                ItemMataKuliahCard(
-                    matkul = matkul,
-                    onDeleteClicked = {
-                        daftarMataKuliah.remove(matkul)
-                        Toast.makeText(context, "Mata kuliah dihapus", Toast.LENGTH_SHORT).show()
+        // List matkul yang udah diinput (atau keadaan kosong jika belum ada)
+        if (daftarMataKuliah.isEmpty()) {
+            item {
+                Card(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 16.dp, vertical = 4.dp),
+                    shape = RoundedCornerShape(12.dp),
+                    colors = CardDefaults.cardColors(containerColor = Color.White),
+                    elevation = CardDefaults.cardElevation(defaultElevation = 1.dp)
+                ) {
+                    Box(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(24.dp),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Text(
+                            text = "Belum ada mata kuliah. Silakan isi form di atas.",
+                            fontSize = 13.sp,
+                            color = TextGray
+                        )
                     }
-                )
+                }
+            }
+        } else {
+            items(
+                items = daftarMataKuliah,
+                key = { it.id }
+            ) { matkul ->
+                Box(modifier = Modifier.padding(horizontal = 16.dp, vertical = 4.dp)) {
+                    ItemMataKuliahCard(
+                        matkul = matkul,
+                        onDeleteClicked = {
+                            daftarMataKuliah.remove(matkul)
+                            Toast.makeText(context, "Mata kuliah dihapus", Toast.LENGTH_SHORT).show()
+                        }
+                    )
+                }
             }
         }
 
