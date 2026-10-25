@@ -52,17 +52,17 @@ import androidx.compose.ui.unit.sp
 import java.util.Locale
 
 // Palette warna khusus tema aplikasi
-val HeaderNavy = Color(0xFFFBCFE8)
+val HeaderNavy = Color(0xFFF5437E)
 val LightBg = Color(0xFFF4F6FB)
-val CardBorderColor = Color(0xFFE2E8F0)
-val PrimaryBlue = Color(0xFF1D61E7)
-val TextDark = Color(0xFF1E293B)
-val TextGray = Color(0xFF64748B)
+val CardBorderColor = Color(0xFF85A8D5)
+val PrimaryBlue = Color(0xFFF5437E)
+val TextDark = Color(0xFF14171A)
+val TextGray = Color(0xFF1A1F26)
 val TrashRed = Color(0xFFEF4444)
 val GreenSuccess = Color(0xFF10B981)
 val GreenSuccessBg = Color(0xFFECFDF5)
 
-// Header paling atas, udah pake stauts biar gak ketutup
+// Header paling atas, udah pake status biar gak ketutup
 @Composable
 fun HeaderSection() {
     Box(
@@ -99,7 +99,7 @@ fun HeaderSection() {
                 )
                 Text(
                     text = "Cek nilai, hitung IPS, dan pantau batas SKS dengan mudah.",
-                    color = Color(0xFF94A3B8),
+                    color = Color(0xFF0D4288),
                     fontSize = 12.sp
                 )
             }
@@ -445,7 +445,7 @@ fun ItemMataKuliahCard(
             ) {
                 Surface(
                     shape = RoundedCornerShape(8.dp),
-                    color = Color(0xFFF1F5F9),
+                    color = Color(0xFF66A1DC),
                     modifier = Modifier.padding(end = 8.dp)
                 ) {
                     Text(

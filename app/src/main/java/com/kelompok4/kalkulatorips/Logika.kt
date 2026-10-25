@@ -9,7 +9,9 @@ object Logika {
     // Patokan acuan nilai huruf ke bobot angkanya
     val daftarPilihanNilai = listOf(
         "A" to 4.00,
+        "B+" to 3.5,
         "B" to 3.00,
+        "C+" to 2.5,
         "C" to 2.00,
         "D" to 1.00,
         "E" to 0.00,
