@@ -26,8 +26,9 @@ object Logika {
             nilaiAngka in 80.0..<85.0 -> "A-"
             nilaiAngka in 75.0..<80.0 -> "B+"
             nilaiAngka in 70.0..<75.0 -> "B"
-            nilaiAngka in 65.0..<70.0 -> "C+"
-            nilaiAngka in 55.0..<65.0 -> "C"
+            nilaiAngka in 65.0..<70.0 -> "B-"
+            nilaiAngka in 60.0..<65.0 -> "C+"
+            nilaiAngka in 55.0..<60.0 -> "C"
             nilaiAngka in 40.0..<55.0 -> "D"
             else -> "E"
         }
@@ -74,7 +75,7 @@ object Logika {
         return daftarMK.sumOf { it.sks }
     }
 
-    // Aturan standar kampus buat nentuin jatah SKS semester depan
+    // Aturan standar kampus buat nentuin jatah SKS semester depan berdasarkan IPS
     fun tentukanBatasSKS(ips: Double): Int {
         return when {
             ips >= 3.00 -> 24
@@ -83,6 +84,13 @@ object Logika {
             ips >= 1.50 -> 15
             else -> 12
         }
+    }
+
+    // Hitung batas SKS berdasarkan daftar matkul (jika belum ada data/kosong, default 24 SKS)
+    fun hitungBatasSKS(daftarMK: List<MataKuliah>): Int {
+        if (daftarMK.isEmpty()) return 24
+        val ips = hitungIPS(daftarMK)
+        return tentukanBatasSKS(ips)
     }
 
     fun hitungBatasSKS(ips: Double): Int = tentukanBatasSKS(ips)

@@ -1,4 +1,3 @@
-
 package com.kelompok4.kalkulatorips
 
 import android.widget.Toast
@@ -48,9 +47,7 @@ fun MainScreen() {
     val context = LocalContext.current
 
     // Data awal kosongan user bisa nambah user
-    val daftarMataKuliah = remember {
-        mutableStateListOf<MataKuliah>()
-    }
+    val daftarMataKuliah = remember { mutableStateListOf<MataKuliah>() }
 
     // State penampung inputan form
     var namaInput by remember { mutableStateOf("") }
@@ -60,7 +57,7 @@ fun MainScreen() {
     // Hitung ulang statistik tiap kali data matkul berubah
     val ips = Logika.hitungIPSFormatted(daftarMataKuliah)
     val totalSks = Logika.hitungTotalSKS(daftarMataKuliah)
-    val batasSks = Logika.hitungBatasSKS(ips)
+    val batasSks = Logika.hitungBatasSKS(daftarMataKuliah)
 
     LazyColumn(
         modifier = Modifier
@@ -87,7 +84,7 @@ fun MainScreen() {
                         title = "IPS Semester",
                         value = String.format(Locale.US, "%.2f", ips),
                         icon = Icons.Default.Analytics,
-                        iconBgColor = Color(0xFFFBCFE8),
+                        iconBgColor = Color(0xFFEFF6FF),
                         iconTint = Color(0xFF2563EB),
                         modifier = Modifier.weight(1f)
                     )
@@ -97,7 +94,7 @@ fun MainScreen() {
                         value = "$totalSks",
                         subtext = "/ 144",
                         icon = Icons.Default.Book,
-                        iconBgColor = Color(0xFFFBCFE8),
+                        iconBgColor = Color(0xFFECFDF5),
                         iconTint = Color(0xFF10B981),
                         modifier = Modifier.weight(1f)
                     )
@@ -107,7 +104,7 @@ fun MainScreen() {
                         value = "$batasSks",
                         subtext = "/ 144",
                         icon = Icons.Default.TrackChanges,
-                        iconBgColor = Color(0xFFFBCFE8),
+                        iconBgColor = Color(0xFFF3E8FF),
                         iconTint = Color(0xFF9333EA),
                         modifier = Modifier.weight(1f)
                     )
@@ -125,34 +122,19 @@ fun MainScreen() {
                     onNilaiSelected = { nilaiSelected = it },
                     onTambahClicked = {
                         if (namaInput.isBlank()) {
-                            Toast.makeText(
-                                context,
-                                "Isi dulu nama mata kuliahnya ya!",
-                                Toast.LENGTH_SHORT
-                            ).show()
+                            Toast.makeText(context, "Isi dulu nama mata kuliahnya ya!", Toast.LENGTH_SHORT).show()
                             return@FormTambahMataKuliahCard
                         }
-
                         if (sksSelected == null) {
-                            Toast.makeText(
-                                context,
-                                "Pilih jumlah SKS terlebih dahulu!",
-                                Toast.LENGTH_SHORT
-                            ).show()
+                            Toast.makeText(context, "Pilih jumlah SKS terlebih dahulu!", Toast.LENGTH_SHORT).show()
                             return@FormTambahMataKuliahCard
                         }
-
                         if (nilaiSelected == null) {
-                            Toast.makeText(
-                                context,
-                                "Pilih nilai hurufnya dulu ya!",
-                                Toast.LENGTH_SHORT
-                            ).show()
+                            Toast.makeText(context, "Pilih nilai hurufnya dulu ya!", Toast.LENGTH_SHORT).show()
                             return@FormTambahMataKuliahCard
                         }
 
                         val bobot = Logika.dapatkanBobot(nilaiSelected!!)
-
                         daftarMataKuliah.add(
                             0, // Taruh paling atas
                             MataKuliah(
@@ -163,16 +145,11 @@ fun MainScreen() {
                             )
                         )
 
-                        // Reset inputan setelah berhasil
+                        // Riset inputan setelah berhasil
                         namaInput = ""
                         sksSelected = null
                         nilaiSelected = null
-
-                        Toast.makeText(
-                            context,
-                            "Sip! Mata kuliah berhasil ditambah",
-                            Toast.LENGTH_SHORT
-                        ).show()
+                        Toast.makeText(context, "Sip! Mata kuliah berhasil ditambah", Toast.LENGTH_SHORT).show()
                     }
                 )
 
@@ -197,9 +174,7 @@ fun MainScreen() {
                             modifier = Modifier.size(18.dp)
                         )
                     }
-
                     Spacer(modifier = Modifier.width(10.dp))
-
                     Text(
                         text = "Daftar Mata Kuliah (${daftarMataKuliah.size})",
                         fontSize = 16.sp,
@@ -211,51 +186,50 @@ fun MainScreen() {
         }
 
         // List matkul yang udah diinput (atau keadaan kosong jika belum ada)
-
         if (daftarMataKuliah.isEmpty()) {
             item {
-                EmptyMataKuliahState(
+                Card(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(horizontal = 16.dp, vertical = 4.dp)
-                )
+                        .padding(horizontal = 16.dp, vertical = 4.dp),
+                    shape = RoundedCornerShape(12.dp),
+                    colors = CardDefaults.cardColors(containerColor = Color.White),
+                    elevation = CardDefaults.cardElevation(defaultElevation = 1.dp)
+                ) {
+                    Box(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(24.dp),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Text(
+                            text = "Belum ada mata kuliah. Silakan isi form di atas.",
+                            fontSize = 13.sp,
+                            color = TextGray
+                        )
+                    }
+                }
             }
         } else {
             items(
                 items = daftarMataKuliah,
                 key = { it.id }
             ) { matkul ->
-                Box(
-                    modifier = Modifier.padding(
-                        horizontal = 16.dp,
-                        vertical = 4.dp
-                    )
-                ) {
+                Box(modifier = Modifier.padding(horizontal = 16.dp, vertical = 4.dp)) {
                     ItemMataKuliahCard(
                         matkul = matkul,
                         onDeleteClicked = {
-                            val berhasilDihapus =
-                                daftarMataKuliah.remove(matkul)
-
-                            if (berhasilDihapus) {
-                                Toast.makeText(
-                                    context,
-                                    "Mata kuliah berhasil dihapus",
-                                    Toast.LENGTH_SHORT
-                                ).show()
-                            }
+                            daftarMataKuliah.remove(matkul)
+                            Toast.makeText(context, "Mata kuliah dihapus", Toast.LENGTH_SHORT).show()
                         }
                     )
                 }
             }
         }
 
-
         // Section ringkasan nilai & sebaran
         item {
-            Box(
-                modifier = Modifier.padding(16.dp)
-            ) {
+            Box(modifier = Modifier.padding(16.dp)) {
                 RingkasanNilaiCard(
                     daftarMataKuliah = daftarMataKuliah,
                     ips = ips,
