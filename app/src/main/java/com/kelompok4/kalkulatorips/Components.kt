@@ -477,7 +477,45 @@ fun ItemMataKuliahCard(
         shape = RoundedCornerShape(12.dp),
         colors = CardDefaults.cardColors(containerColor = Color.White),
         elevation = CardDefaults.cardElevation(defaultElevation = 1.dp)
-    )
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(14.dp),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Column(modifier = Modifier.weight(1f)) {
+                Text(
+                    text = matkul.nama,
+                    fontSize = 14.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = TextDark
+                )
+                Spacer(modifier = Modifier.height(4.dp))
+                Text(
+                    text = "SKS: ${matkul.sks}   |   Nilai: ${matkul.nilaiHuruf} (${String.format(Locale.US, "%.2f", matkul.bobot)})",
+                    fontSize = 12.sp,
+                    color = TextGray
+                )
+            }
+
+            Spacer(modifier = Modifier.width(8.dp))
+
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Surface(
+                    shape = RoundedCornerShape(8.dp),
+                    color = Color(0xFF5B9BD5),
+                    modifier = Modifier.padding(end = 8.dp)
+                ) {
+                    Text(
+                        text = String.format(Locale.US, "%.2f", matkul.bobot),
+                        fontSize = 12.sp,
+                        fontWeight = FontWeight.Bold,
+                        color = Color.White,
+                        modifier = Modifier.padding(horizontal = 10.dp, vertical = 6.dp)
+                    )
+                }
 
                 IconButton(
                     onClick = onDeleteClicked,
