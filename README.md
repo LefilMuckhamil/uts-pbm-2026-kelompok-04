@@ -9,19 +9,19 @@ Aplikasi Kalkulator IPS dan SKS ini dibuat menggunakan Kotlin dan Jetpack Compos
 Anggota Kelompok dan Pembagian Peran
 
 1. 
-Mengelola state utama di MainScreen.kt, penyetelan MainActivity.kt, integrasi antarmuka, dan pengujian skenario unit test.
+Model Data dan Fungsi logika kotlin beserta aturan kasus
 
 2. Lefil Muckhamil (2205903040076) - Lefil Muckhamil
-Merancang model data MataKuliah.kt, fungsi kalkulasi logika Kotlin di Logika.kt, serta aturan bisnis perhitungan IPS dan SKS.
+Formulir masukan, validasi, dan pesan kesalahan
 
 3. Mutia Wati
-Membuat formulir input mata kuliah FormTambahMataKuliahCard, penanganan validasi input, serta pesan eror form.
+Composable item daftar, hapus entri, dan tampilan keadaan kosong
 
 4. Nazla Chairunnisa
-Mengembangkan komponen kartu mata kuliah ItemMataKuliahCard, fitur hapus item, serta tampilan saat data kosong.
+tata letak layar, sumber daya strings.xml dan drawable, serta bagian ringkasan
 
 5. Natijah 
-Menyusun tata letak halaman HeaderSection dan SummaryStatCard, penyesuaian warna tema aplikasi, serta kartu ringkasan nilai.
+Pengelolaan state di composable infuk dan alur- bgaian layar , serta pengujian skenario
 
 Tautan Penting
 Video Presentasi YouTube
@@ -34,8 +34,8 @@ Langkah Menjalankan Proyek di Android Studio
 1. Spesifikasi Perangkat Lunak
 Android Studio Ladybug atau versi terbaru.
 JDK 11 atau JDK 17.
-Minimum SDK: API Level 30 (Android 11.0).
-Target SDK: API Level 35.
+Minimum SDK: API Level 31 (Android 12.0).
+
 
 2. Kloning Repositori
 Buka Terminal atau Git Bash, lalu jalankan perintah berikut:
