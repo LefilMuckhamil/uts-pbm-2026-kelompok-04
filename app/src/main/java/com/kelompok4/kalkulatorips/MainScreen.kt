@@ -54,6 +54,11 @@ fun MainScreen() {
     var sksSelected by remember { mutableStateOf<Int?>(null) }
     var nilaiSelected by remember { mutableStateOf<String?>(null) }
 
+    // State penampung pesan kesalahan per kolom
+    var namaError by remember { mutableStateOf<String?>(null) }
+    var sksError by remember { mutableStateOf<String?>(null) }
+    var nilaiError by remember { mutableStateOf<String?>(null) }
+
     // Hitung ulang statistik tiap kali data matkul berubah
     val ips = Logika.hitungIPSFormatted(daftarMataKuliah)
     val totalSks = Logika.hitungTotalSKS(daftarMataKuliah)
@@ -115,28 +120,66 @@ fun MainScreen() {
                 // Form buat nambah matkul baru
                 FormTambahMataKuliahCard(
                     namaMatkul = namaInput,
-                    onNamaChange = { namaInput = it },
+                    onNamaChange = {
+                        namaInput = it
+                        if (namaError != null) namaError = null
+                    },
                     sksSelected = sksSelected,
-                    onSksSelected = { sksSelected = it },
+                    onSksSelected = {
+                        sksSelected = it
+                        if (sksError != null) sksError = null
+                    },
                     nilaiSelected = nilaiSelected,
-                    onNilaiSelected = { nilaiSelected = it },
+                    onNilaiSelected = {
+                        nilaiSelected = it
+                        if (nilaiError != null) nilaiError = null
+                    },
+                    namaError = namaError,
+                    sksError = sksError,
+                    nilaiError = nilaiError,
                     onTambahClicked = {
+                        var isValid = true
+                        val totalSksSaatIni = Logika.hitungTotalSKS(daftarMataKuliah)
+
+                        // Skenario 5: Pengecekan Nama Kosong / Duplikat
                         if (namaInput.isBlank()) {
-                            Toast.makeText(context, "Isi dulu nama mata kuliahnya ya!", Toast.LENGTH_SHORT).show()
-                            return@FormTambahMataKuliahCard
+                            namaError = "Isi dulu nama mata kuliahnya ya!"
+                            isValid = false
+                        } else if (daftarMataKuliah.any { it.nama.equals(namaInput.trim(), ignoreCase = true) }) {
+                            namaError = "Nama mata kuliah sudah ada di daftar!"
+                            isValid = false
+                        } else {
+                            namaError = null
                         }
+
+                        // Skenario 6: Pengecekan SKS
                         if (sksSelected == null) {
-                            Toast.makeText(context, "Pilih jumlah SKS terlebih dahulu!", Toast.LENGTH_SHORT).show()
-                            return@FormTambahMataKuliahCard
+                            sksError = "Pilih jumlah SKS terlebih dahulu!"
+                            isValid = false
+                        } else if (totalSksSaatIni + sksSelected!! > 24) {
+                            sksError = "Total SKS tidak boleh melebihi 24 SKS!"
+                            isValid = false
+                        } else {
+                            sksError = null
                         }
+
+                        // Skenario 7: Pengecekan Nilai
                         if (nilaiSelected == null) {
-                            Toast.makeText(context, "Pilih nilai hurufnya dulu ya!", Toast.LENGTH_SHORT).show()
+                            nilaiError = "Pilih nilai hurufnya dulu ya!"
+                            isValid = false
+                        } else {
+                            nilaiError = null
+                        }
+
+                        // Jika ada masukan tidak valid, tampilkan Toast error dan batalkan penambahan
+                        if (!isValid) {
+                            Toast.makeText(context, "Mohon periksa kolom masukan yang belum diisi!", Toast.LENGTH_SHORT).show()
                             return@FormTambahMataKuliahCard
                         }
 
                         val bobot = Logika.dapatkanBobot(nilaiSelected!!)
                         daftarMataKuliah.add(
-                            0,
+                            0, // Taruh paling atas
                             MataKuliah(
                                 nama = namaInput.trim(),
                                 sks = sksSelected!!,
@@ -145,9 +188,13 @@ fun MainScreen() {
                             )
                         )
 
+                        // Riset inputan setelah berhasil
                         namaInput = ""
                         sksSelected = null
                         nilaiSelected = null
+                        namaError = null
+                        sksError = null
+                        nilaiError = null
                         Toast.makeText(context, "Sip! Mata kuliah berhasil ditambah", Toast.LENGTH_SHORT).show()
                     }
                 )

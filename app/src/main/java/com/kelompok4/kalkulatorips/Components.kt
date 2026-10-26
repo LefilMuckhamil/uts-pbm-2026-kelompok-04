@@ -52,17 +52,17 @@ import androidx.compose.ui.unit.sp
 import java.util.Locale
 
 // Palette warna khusus tema aplikasi
-val HeaderNavy = Color(0xFFF5437E)
+val HeaderNavy = Color(0xFF0F2B5B)
 val LightBg = Color(0xFFF4F6FB)
-val CardBorderColor = Color(0xFF85A8D5)
-val PrimaryBlue = Color(0xFFF5437E)
-val TextDark = Color(0xFF14171A)
-val TextGray = Color(0xFF1A1F26)
+val CardBorderColor = Color(0xFFE2E8F0)
+val PrimaryBlue = Color(0xFF1D61E7)
+val TextDark = Color(0xFF1E293B)
+val TextGray = Color(0xFF64748B)
 val TrashRed = Color(0xFFEF4444)
 val GreenSuccess = Color(0xFF10B981)
 val GreenSuccessBg = Color(0xFFECFDF5)
 
-// Header paling atas, udah pake status biar gak ketutup
+// Header paling atas, udah pake statusBarsPadding biar gak ketutup jam & baterai
 @Composable
 fun HeaderSection() {
     Box(
@@ -99,7 +99,7 @@ fun HeaderSection() {
                 )
                 Text(
                     text = "Cek nilai, hitung IPS, dan pantau batas SKS dengan mudah.",
-                    color = Color(0xFF0D4288),
+                    color = Color(0xFF94A3B8),
                     fontSize = 12.sp
                 )
             }
@@ -185,6 +185,9 @@ fun FormTambahMataKuliahCard(
     onSksSelected: (Int) -> Unit,
     nilaiSelected: String?,
     onNilaiSelected: (String) -> Unit,
+    namaError: String? = null,
+    sksError: String? = null,
+    nilaiError: String? = null,
     onTambahClicked: () -> Unit
 ) {
     var expandedSks by remember { mutableStateOf(false) }
@@ -237,6 +240,12 @@ fun FormTambahMataKuliahCard(
             OutlinedTextField(
                 value = namaMatkul,
                 onValueChange = onNamaChange,
+                isError = namaError != null,
+                supportingText = {
+                    if (namaError != null) {
+                        Text(text = namaError, color = TrashRed, fontSize = 11.sp)
+                    }
+                },
                 textStyle = androidx.compose.ui.text.TextStyle(
                     color = TextDark,
                     fontSize = 14.sp,
@@ -255,12 +264,13 @@ fun FormTambahMataKuliahCard(
                     focusedTextColor = TextDark,
                     unfocusedTextColor = TextDark,
                     focusedBorderColor = PrimaryBlue,
-                    unfocusedBorderColor = CardBorderColor
+                    unfocusedBorderColor = CardBorderColor,
+                    errorBorderColor = TrashRed
                 ),
                 singleLine = true
             )
 
-            Spacer(modifier = Modifier.height(12.dp))
+            Spacer(modifier = Modifier.height(8.dp))
 
             // Dropdown milih jumlah SKS
             Text(
@@ -279,6 +289,12 @@ fun FormTambahMataKuliahCard(
                     value = if (sksSelected != null) "$sksSelected SKS" else "",
                     onValueChange = {},
                     readOnly = true,
+                    isError = sksError != null,
+                    supportingText = {
+                        if (sksError != null) {
+                            Text(text = sksError, color = TrashRed, fontSize = 11.sp)
+                        }
+                    },
                     textStyle = androidx.compose.ui.text.TextStyle(
                         color = TextDark,
                         fontSize = 14.sp,
@@ -309,7 +325,8 @@ fun FormTambahMataKuliahCard(
                         unfocusedTextColor = TextDark,
                         disabledTextColor = TextDark,
                         focusedBorderColor = PrimaryBlue,
-                        unfocusedBorderColor = CardBorderColor
+                        unfocusedBorderColor = CardBorderColor,
+                        errorBorderColor = TrashRed
                     )
                 )
                 ExposedDropdownMenu(
@@ -340,7 +357,7 @@ fun FormTambahMataKuliahCard(
                 }
             }
 
-            Spacer(modifier = Modifier.height(12.dp))
+            Spacer(modifier = Modifier.height(8.dp))
 
             // Dropdown milih nilai huruf
             Text(
@@ -362,6 +379,12 @@ fun FormTambahMataKuliahCard(
                     } else "",
                     onValueChange = {},
                     readOnly = true,
+                    isError = nilaiError != null,
+                    supportingText = {
+                        if (nilaiError != null) {
+                            Text(text = nilaiError, color = TrashRed, fontSize = 11.sp)
+                        }
+                    },
                     textStyle = androidx.compose.ui.text.TextStyle(
                         color = TextDark,
                         fontSize = 14.sp,
@@ -384,7 +407,8 @@ fun FormTambahMataKuliahCard(
                         unfocusedTextColor = TextDark,
                         disabledTextColor = TextDark,
                         focusedBorderColor = PrimaryBlue,
-                        unfocusedBorderColor = CardBorderColor
+                        unfocusedBorderColor = CardBorderColor,
+                        errorBorderColor = TrashRed
                     )
                 )
                 ExposedDropdownMenu(
@@ -442,7 +466,6 @@ fun FormTambahMataKuliahCard(
     }
 }
 
-
 // Tampilan tiap item matkul di dalam list, lengkap sama tombol hapus
 @Composable
 fun ItemMataKuliahCard(
@@ -452,12 +475,8 @@ fun ItemMataKuliahCard(
     Card(
         modifier = Modifier.fillMaxWidth(),
         shape = RoundedCornerShape(12.dp),
-        colors = CardDefaults.cardColors(
-            containerColor = Color.White
-        ),
-        elevation = CardDefaults.cardElevation(
-            defaultElevation = 1.dp
-        )
+        colors = CardDefaults.cardColors(containerColor = Color.White),
+        elevation = CardDefaults.cardElevation(defaultElevation = 1.dp)
     ) {
         Row(
             modifier = Modifier
@@ -466,18 +485,14 @@ fun ItemMataKuliahCard(
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Column(
-                modifier = Modifier.weight(1f)
-            ) {
+            Column(modifier = Modifier.weight(1f)) {
                 Text(
                     text = matkul.nama,
                     fontSize = 14.sp,
                     fontWeight = FontWeight.Bold,
                     color = TextDark
                 )
-
                 Spacer(modifier = Modifier.height(4.dp))
-
                 Text(
                     text = "SKS: ${matkul.sks}   |   Nilai: ${matkul.nilaiHuruf} (${String.format(Locale.US, "%.2f", matkul.bobot)})",
                     fontSize = 12.sp,
@@ -487,27 +502,18 @@ fun ItemMataKuliahCard(
 
             Spacer(modifier = Modifier.width(8.dp))
 
-            Row(
-                verticalAlignment = Alignment.CenterVertically
-            ) {
+            Row(verticalAlignment = Alignment.CenterVertically) {
                 Surface(
                     shape = RoundedCornerShape(8.dp),
-                    color = Color(0xFF66A1DC),
+                    color = Color(0xFFF1F5F9),
                     modifier = Modifier.padding(end = 8.dp)
                 ) {
                     Text(
-                        text = String.format(
-                            Locale.US,
-                            "%.2f",
-                            matkul.bobot
-                        ),
+                        text = String.format(Locale.US, "%.2f", matkul.bobot),
                         fontSize = 12.sp,
                         fontWeight = FontWeight.Bold,
                         color = TextDark,
-                        modifier = Modifier.padding(
-                            horizontal = 10.dp,
-                            vertical = 6.dp
-                        )
+                        modifier = Modifier.padding(horizontal = 10.dp, vertical = 6.dp)
                     )
                 }
 
@@ -517,7 +523,7 @@ fun ItemMataKuliahCard(
                 ) {
                     Icon(
                         imageVector = Icons.Default.Delete,
-                        contentDescription = "Hapus mata kuliah ${matkul.nama}",
+                        contentDescription = "Hapus Mata Kuliah",
                         tint = TrashRed,
                         modifier = Modifier.size(20.dp)
                     )
@@ -526,38 +532,6 @@ fun ItemMataKuliahCard(
         }
     }
 }
-
-
-
-@Composable
-fun EmptyMataKuliahState(
-    modifier: Modifier = Modifier
-) {
-    Card(
-        modifier = modifier,
-        shape = RoundedCornerShape(12.dp),
-        colors = CardDefaults.cardColors(
-            containerColor = Color.White
-        ),
-        elevation = CardDefaults.cardElevation(
-            defaultElevation = 1.dp
-        )
-    ) {
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(24.dp),
-            contentAlignment = Alignment.Center
-        ) {
-            Text(
-                text = "Belum ada mata kuliah. Silakan isi dulu yaaw!!",
-                fontSize = 13.sp,
-                color = TextGray
-            )
-        }
-    }
-}
-
 
 // Card bagian bawah buat ngeliat statistik sebaran nilai & info syarat SKS
 @Composable
