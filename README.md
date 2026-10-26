@@ -6,22 +6,22 @@ Dosen Pengampu: Rivansyah Suhendra, S.Kom., M.T.
 Ringkasan Aplikasi
 Aplikasi Kalkulator IPS dan SKS ini dibuat menggunakan Kotlin dan Jetpack Compose dalam bentuk aplikasi satu layar. Aplikasi ini bertujuan membantu mahasiswa menghitung Indeks Prestasi Semester (IPS) secara langsung, mengetahui total SKS yang diambil, melihat sebaran nilai mutu, serta menentukan batas maksimal SKS yang bisa diambil pada semester berikutnya sesuai aturan kampus.
 
-Anggota Kelompok dan Pembagian Peran
+KELOMPOK 4 
 
-1. 
-Mengelola state utama di MainScreen.kt, penyetelan MainActivity.kt, integrasi antarmuka, dan pengujian skenario unit test.
+1. T. Tandi Pratama (2305903040004) - Github : tandipratama76
+   Model Data dan Fungsi logika kotlin beserta aturan kasus
 
-2. Lefil Muckhamil (2205903040076) - Lefil Muckhamil
-Merancang model data MataKuliah.kt, fungsi kalkulasi logika Kotlin di Logika.kt, serta aturan bisnis perhitungan IPS dan SKS.
+2. Lefil Muckhamil (2205903040076) - Github : Lefil Muckhamil
+   Formulir masukan, validasi, dan pesan kesalahan
 
-3. Mutia Wati
-Membuat formulir input mata kuliah FormTambahMataKuliahCard, penanganan validasi input, serta pesan eror form.
+3. Mutia Wati (2305903040057) - Github : mutyaawattri
+   composable item daftar, hapus entri, dan tampilan keadaan kosong
 
-4. Nazla Chairunnisa
-Mengembangkan komponen kartu mata kuliah ItemMataKuliahCard, fitur hapus item, serta tampilan saat data kosong.
+4. Nazla Chairunnisa (2305903040009) Github : nazlachairunnisaaaa25-lang
+   tata letak layar, sumber daya strings.xml dan drawable, serta bagian ringkasan
 
-5. Natijah 
-Menyusun tata letak halaman HeaderSection dan SummaryStatCard, penyesuaian warna tema aplikasi, serta kartu ringkasan nilai.
+5. Natijah Illiyin Nasution (2305903040012) - Github : natijahilliyin21-cpu
+   Pengelolaan state di composable induk dan alur- bgaian layar , serta pengujian skenario
 
 Tautan Penting
 Video Presentasi YouTube
@@ -34,8 +34,8 @@ Langkah Menjalankan Proyek di Android Studio
 1. Spesifikasi Perangkat Lunak
 Android Studio Ladybug atau versi terbaru.
 JDK 11 atau JDK 17.
-Minimum SDK: API Level 30 (Android 11.0).
-Target SDK: API Level 35.
+Minimum SDK: API Level 31 (Android 12.0).
+
 
 2. Kloning Repositori
 Buka Terminal atau Git Bash, lalu jalankan perintah berikut:
