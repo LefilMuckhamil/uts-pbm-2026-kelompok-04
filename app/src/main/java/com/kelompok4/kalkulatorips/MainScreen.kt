@@ -49,20 +49,6 @@ fun MainScreen() {
     // Data awal kosongan user bisa nambah user
     val daftarMataKuliah = remember { mutableStateListOf<MataKuliah>() }
 
-    // State penampung inputan form
-    var namaInput by remember { mutableStateOf("") }
-    var sksSelected by remember { mutableStateOf<Int?>(null) }
-    var nilaiSelected by remember { mutableStateOf<String?>(null) }
-
-    // State penampung pesan kesalahan per kolom
-    var namaError by remember { mutableStateOf<String?>(null) }
-    var sksError by remember { mutableStateOf<String?>(null) }
-    var nilaiError by remember { mutableStateOf<String?>(null) }
-
-    // Hitung ulang statistik tiap kali data matkul berubah
-    val ips = Logika.hitungIPSFormatted(daftarMataKuliah)
-    val totalSks = Logika.hitungTotalSKS(daftarMataKuliah)
-    val batasSks = Logika.hitungBatasSKS(daftarMataKuliah)
 
     LazyColumn(
         modifier = Modifier
