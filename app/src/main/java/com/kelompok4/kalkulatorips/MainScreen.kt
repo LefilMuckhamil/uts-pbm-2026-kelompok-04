@@ -50,6 +50,20 @@ fun MainScreen() {
     val daftarMataKuliah = remember { mutableStateListOf<MataKuliah>() }
 
 
+    var namaInput by remember { mutableStateOf("") }
+    var sksSelected by remember { mutableStateOf<Int?>(null) }
+    var nilaiSelected by remember { mutableStateOf<String?>(null) }
+
+
+    var namaError by remember { mutableStateOf<String?>(null) }
+    var sksError by remember { mutableStateOf<String?>(null) }
+    var nilaiError by remember { mutableStateOf<String?>(null) }
+
+
+    val ips = Logika.hitungIPSFormatted(daftarMataKuliah)
+    val totalSks = Logika.hitungTotalSKS(daftarMataKuliah)
+    val batasSks = Logika.hitungBatasSKS(daftarMataKuliah)
+
     LazyColumn(
         modifier = Modifier
             .fillMaxSize()
