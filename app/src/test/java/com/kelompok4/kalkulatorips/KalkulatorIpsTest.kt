@@ -12,9 +12,6 @@ class KalkulatorIpsTest {
             MataKuliah(nama = "Basis Data", sks = 4, nilaiHuruf = "B", bobot = 3.0),
             MataKuliah(nama = "Matematika Diskrit 2", sks = 3, nilaiHuruf = "C", bobot = 2.0)
         )
-        // Total Poin = (3*4) + (4*3) + (3*2) = 12 + 12 + 6 = 30.0
-        // Total SKS = 3 + 4 + 3 = 10
-        // IPS = 30.0 / 10 = 3.00
 
         val ips = Logika.hitungIPS(listMatkul)
         assertEquals(3.00, ips, 0.001)

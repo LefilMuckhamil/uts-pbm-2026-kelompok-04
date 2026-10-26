@@ -136,7 +136,7 @@ fun MainScreen() {
 
                         val bobot = Logika.dapatkanBobot(nilaiSelected!!)
                         daftarMataKuliah.add(
-                            0, // Taruh paling atas
+                            0,
                             MataKuliah(
                                 nama = namaInput.trim(),
                                 sks = sksSelected!!,
@@ -145,7 +145,6 @@ fun MainScreen() {
                             )
                         )
 
-                        // Riset inputan setelah berhasil
                         namaInput = ""
                         sksSelected = null
                         nilaiSelected = null

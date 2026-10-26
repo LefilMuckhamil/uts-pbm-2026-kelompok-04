@@ -86,9 +86,9 @@ object Logika {
         }
     }
 
-    // Hitung batas SKS berdasarkan daftar matkul (jika belum ada data/kosong, default 24 SKS)
+    // Hitung batas SKS berdasarkan daftar matkul (jika belum ada data/kosong, default 12 SKS)
     fun hitungBatasSKS(daftarMK: List<MataKuliah>): Int {
-        if (daftarMK.isEmpty()) return 24
+        if (daftarMK.isEmpty()) return 12
         val ips = hitungIPS(daftarMK)
         return tentukanBatasSKS(ips)
     }
