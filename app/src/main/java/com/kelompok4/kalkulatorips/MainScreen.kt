@@ -89,7 +89,7 @@ fun MainScreen() {
                         title = "IPS Semester",
                         value = String.format(Locale.US, "%.2f", ips),
                         icon = Icons.Default.Analytics,
-                        iconBgColor = Color(0xFFEFF6FF),
+                        iconBgColor = Color(0xFFFBCFE8),
                         iconTint = Color(0xFF2563EB),
                         modifier = Modifier.weight(1f)
                     )
@@ -99,7 +99,7 @@ fun MainScreen() {
                         value = "$totalSks",
                         subtext = "/ 144",
                         icon = Icons.Default.Book,
-                        iconBgColor = Color(0xFFECFDF5),
+                        iconBgColor = Color(0xFFFBCFE8),
                         iconTint = Color(0xFF10B981),
                         modifier = Modifier.weight(1f)
                     )
@@ -109,7 +109,7 @@ fun MainScreen() {
                         value = "$batasSks",
                         subtext = "/ 144",
                         icon = Icons.Default.TrackChanges,
-                        iconBgColor = Color(0xFFF3E8FF),
+                        iconBgColor = Color(0xFFFBCFE8),
                         iconTint = Color(0xFF9333EA),
                         modifier = Modifier.weight(1f)
                     )

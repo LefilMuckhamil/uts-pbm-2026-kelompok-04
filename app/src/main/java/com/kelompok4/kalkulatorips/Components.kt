@@ -51,11 +51,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import java.util.Locale
 
-// Palette warna khusus tema aplikasi
-val HeaderNavy = Color(0xFF0F2B5B)
+// Palette warna khusus tema aplikasi (Pink Cerah / Hot Pink & Aksesori Biru)
+val HeaderNavy = Color(0xFFFF2B66) // Hot Pink Header
 val LightBg = Color(0xFFF4F6FB)
 val CardBorderColor = Color(0xFFE2E8F0)
-val PrimaryBlue = Color(0xFF1D61E7)
+val PrimaryBlue = Color(0xFFFF2B66) // Hot Pink Utama Button & Accent
 val TextDark = Color(0xFF1E293B)
 val TextGray = Color(0xFF64748B)
 val TrashRed = Color(0xFFEF4444)
@@ -99,7 +99,7 @@ fun HeaderSection() {
                 )
                 Text(
                     text = "Cek nilai, hitung IPS, dan pantau batas SKS dengan mudah.",
-                    color = Color(0xFF94A3B8),
+                    color = Color(0xFFFFE4E6),
                     fontSize = 12.sp
                 )
             }
@@ -505,14 +505,14 @@ fun ItemMataKuliahCard(
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Surface(
                     shape = RoundedCornerShape(8.dp),
-                    color = Color(0xFFF1F5F9),
+                    color = Color(0xFF5B9BD5),
                     modifier = Modifier.padding(end = 8.dp)
                 ) {
                     Text(
                         text = String.format(Locale.US, "%.2f", matkul.bobot),
                         fontSize = 12.sp,
                         fontWeight = FontWeight.Bold,
-                        color = TextDark,
+                        color = Color.White,
                         modifier = Modifier.padding(horizontal = 10.dp, vertical = 6.dp)
                     )
                 }
