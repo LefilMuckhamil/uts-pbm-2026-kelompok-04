@@ -67,7 +67,7 @@ fun MainScreen() {
             .fillMaxSize()
             .background(LightBg)
     ) {
-        // Banner header atas
+
         item {
             HeaderSection()
         }
