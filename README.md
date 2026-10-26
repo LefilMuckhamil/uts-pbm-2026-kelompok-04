@@ -24,7 +24,7 @@ KELOMPOK 4
    Pengelolaan state di composable induk dan alur- bgaian layar , serta pengujian skenario
 
 Tautan Penting
-Video Presentasi YouTube
+Video Presentasi YouTube : https://youtu.be/7xYnN3eBYQU?si=utUBxF-hiUy7CmOl
 Repositori GitHub: https://github.com/LefilMuckhamil/uts-pbm-2026-kelompok-04
 
 Tangkapan Layar Aplikasi
