@@ -50,4 +50,26 @@ class KalkulatorIpsTest {
         assertEquals(2.00, Logika.getBobotFromHuruf("C"), 0.001)
         assertEquals(0.00, Logika.getBobotFromHuruf("E"), 0.001)
     }
+
+    @Test
+    fun testHitungTotalSKS() {
+        val listMatkul = listOf(
+            MataKuliah(
+                nama = "Pemrograman Android",
+                sks = 3,
+                nilaiHuruf = "A",
+                bobot = 4.0
+            ),
+            MataKuliah(
+                nama = "Basis Data",
+                sks = 4,
+                nilaiHuruf = "B",
+                bobot = 3.0
+            )
+        )
+
+        assertEquals(7, Logika.hitungTotalSKS(listMatkul))
+        assertEquals(0, Logika.hitungTotalSKS(emptyList()))
+    }
+
 }
