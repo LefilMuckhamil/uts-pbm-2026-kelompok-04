@@ -8,19 +8,19 @@ Aplikasi Kalkulator IPS dan SKS ini dibuat menggunakan Kotlin dan Jetpack Compos
 
 Anggota Kelompok dan Pembagian Peran
 
-1. 
+1. T. Tandi Pratama (2305903040004) - Github : tandipratama76
 Model Data dan Fungsi logika kotlin beserta aturan kasus
 
-2. Lefil Muckhamil (2205903040076) - Lefil Muckhamil
+2. Lefil Muckhamil (2205903040076) - Github : Lefil Muckhamil
 Formulir masukan, validasi, dan pesan kesalahan
 
-3. Mutia Wati
+3. Mutia Wati (2305903040057) - Github : mutyaawattri
 Composable item daftar, hapus entri, dan tampilan keadaan kosong
 
-4. Nazla Chairunnisa
+4. Nazla Chairunnisa (2305903040009) Github : nazlachairunnisaaaa25-lang
 tata letak layar, sumber daya strings.xml dan drawable, serta bagian ringkasan
 
-5. Natijah 
+5. Natijah Illiyin Nasution (2305903040012)
 Pengelolaan state di composable infuk dan alur- bgaian layar , serta pengujian skenario
 
 Tautan Penting
