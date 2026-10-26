@@ -9,9 +9,11 @@ object Logika {
     // Patokan acuan nilai huruf ke bobot angkanya
     val daftarPilihanNilai = listOf(
         "A" to 4.00,
-        "B+" to 3.5,
+        "A-" to 3.75,
+        "B+" to 3.50,
         "B" to 3.00,
-        "C+" to 2.5,
+        "B-" to 2.75,
+        "C+" to 2.50,
         "C" to 2.00,
         "D" to 1.00,
         "E" to 0.00,
@@ -24,9 +26,8 @@ object Logika {
             nilaiAngka in 80.0..<85.0 -> "A-"
             nilaiAngka in 75.0..<80.0 -> "B+"
             nilaiAngka in 70.0..<75.0 -> "B"
-            nilaiAngka in 65.0..<70.0 -> "B-"
-            nilaiAngka in 60.0..<65.0 -> "C+"
-            nilaiAngka in 55.0..<60.0 -> "C"
+            nilaiAngka in 65.0..<70.0 -> "C+"
+            nilaiAngka in 55.0..<65.0 -> "C"
             nilaiAngka in 40.0..<55.0 -> "D"
             else -> "E"
         }
@@ -37,8 +38,10 @@ object Logika {
         return daftarPilihanNilai.find { it.first.equals(nilaiHuruf, ignoreCase = true) }?.second
             ?: when (nilaiHuruf.uppercase()) {
                 "A" -> 4.0
+                "A-" -> 3.75
                 "B+" -> 3.5
                 "B" -> 3.0
+                "B-" -> 2.75
                 "C+" -> 2.5
                 "C" -> 2.0
                 "D" -> 1.0

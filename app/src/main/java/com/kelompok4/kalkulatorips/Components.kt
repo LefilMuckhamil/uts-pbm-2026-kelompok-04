@@ -237,6 +237,11 @@ fun FormTambahMataKuliahCard(
             OutlinedTextField(
                 value = namaMatkul,
                 onValueChange = onNamaChange,
+                textStyle = androidx.compose.ui.text.TextStyle(
+                    color = TextDark,
+                    fontSize = 14.sp,
+                    fontWeight = FontWeight.SemiBold
+                ),
                 placeholder = {
                     Text(
                         text = "Contoh: Algoritma dan Pemrograman",
@@ -247,6 +252,8 @@ fun FormTambahMataKuliahCard(
                 modifier = Modifier.fillMaxWidth(),
                 shape = RoundedCornerShape(10.dp),
                 colors = OutlinedTextFieldDefaults.colors(
+                    focusedTextColor = TextDark,
+                    unfocusedTextColor = TextDark,
                     focusedBorderColor = PrimaryBlue,
                     unfocusedBorderColor = CardBorderColor
                 ),
@@ -272,6 +279,11 @@ fun FormTambahMataKuliahCard(
                     value = if (sksSelected != null) "$sksSelected SKS" else "",
                     onValueChange = {},
                     readOnly = true,
+                    textStyle = androidx.compose.ui.text.TextStyle(
+                        color = TextDark,
+                        fontSize = 14.sp,
+                        fontWeight = FontWeight.SemiBold
+                    ),
                     placeholder = {
                         Text(
                             text = "Pilih jumlah SKS",
@@ -293,21 +305,36 @@ fun FormTambahMataKuliahCard(
                         .fillMaxWidth(),
                     shape = RoundedCornerShape(10.dp),
                     colors = OutlinedTextFieldDefaults.colors(
+                        focusedTextColor = TextDark,
+                        unfocusedTextColor = TextDark,
+                        disabledTextColor = TextDark,
                         focusedBorderColor = PrimaryBlue,
                         unfocusedBorderColor = CardBorderColor
                     )
                 )
                 ExposedDropdownMenu(
                     expanded = expandedSks,
-                    onDismissRequest = { expandedSks = false }
+                    onDismissRequest = { expandedSks = false },
+                    containerColor = Color.White,
+                    modifier = Modifier.background(Color.White)
                 ) {
                     daftarSks.forEach { sks ->
                         DropdownMenuItem(
-                            text = { Text("$sks SKS") },
+                            text = {
+                                Text(
+                                    text = "$sks SKS",
+                                    color = TextDark,
+                                    fontWeight = FontWeight.SemiBold,
+                                    fontSize = 14.sp
+                                )
+                            },
                             onClick = {
                                 onSksSelected(sks)
                                 expandedSks = false
-                            }
+                            },
+                            colors = androidx.compose.material3.MenuDefaults.itemColors(
+                                textColor = TextDark
+                            )
                         )
                     }
                 }
@@ -335,6 +362,11 @@ fun FormTambahMataKuliahCard(
                     } else "",
                     onValueChange = {},
                     readOnly = true,
+                    textStyle = androidx.compose.ui.text.TextStyle(
+                        color = TextDark,
+                        fontSize = 14.sp,
+                        fontWeight = FontWeight.SemiBold
+                    ),
                     placeholder = {
                         Text(
                             text = "Pilih nilai huruf",
@@ -348,21 +380,36 @@ fun FormTambahMataKuliahCard(
                         .fillMaxWidth(),
                     shape = RoundedCornerShape(10.dp),
                     colors = OutlinedTextFieldDefaults.colors(
+                        focusedTextColor = TextDark,
+                        unfocusedTextColor = TextDark,
+                        disabledTextColor = TextDark,
                         focusedBorderColor = PrimaryBlue,
                         unfocusedBorderColor = CardBorderColor
                     )
                 )
                 ExposedDropdownMenu(
                     expanded = expandedNilai,
-                    onDismissRequest = { expandedNilai = false }
+                    onDismissRequest = { expandedNilai = false },
+                    containerColor = Color.White,
+                    modifier = Modifier.background(Color.White)
                 ) {
                     Logika.daftarPilihanNilai.forEach { (huruf, bobot) ->
                         DropdownMenuItem(
-                            text = { Text("$huruf (${String.format(Locale.US, "%.2f", bobot)})") },
+                            text = {
+                                Text(
+                                    text = "$huruf (${String.format(Locale.US, "%.2f", bobot)})",
+                                    color = TextDark,
+                                    fontWeight = FontWeight.SemiBold,
+                                    fontSize = 14.sp
+                                )
+                            },
                             onClick = {
                                 onNilaiSelected(huruf)
                                 expandedNilai = false
-                            }
+                            },
+                            colors = androidx.compose.material3.MenuDefaults.itemColors(
+                                textColor = TextDark
+                            )
                         )
                     }
                 }
